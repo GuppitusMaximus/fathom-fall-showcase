@@ -67,7 +67,7 @@ moves, and stackable status effects (poison, burn, curse, heal-over-time).
 |---|---|
 | Engine | Phaser 3 + Vite, vanilla JavaScript |
 | Scale | 12 scenes, 20+ system modules, 100 floors of data-driven content |
-| Backend | PvP ghost snapshots, matchmaking with floor-wide fallback, leaderboards |
+| Backend | FastAPI PvP service + PostgreSQL on a VPS behind a Cloudflare Tunnel — see [The PvP backend](#the-pvp-backend) |
 | QA | Playwright browser tests + a headless battle simulator for combat balance tuning |
 | Art | AI-generated pixel art — sprite sheets, zone backgrounds, and portraits produced by a scripted generation pipeline with atlas packing |
 | Delivery | Continuous — every change planned, implemented, QA'd, and reviewed by autonomous agents; `main` auto-deploys to fathomfall.com |
@@ -75,6 +75,32 @@ moves, and stackable status effects (poison, burn, curse, heal-over-time).
 The balance work is its own story: a **headless simulator** runs thousands of battles per tuning
 pass, so combat math (fish stats, equipment scaling, encounter difficulty) is adjusted against
 simulation data rather than gut feel — by an agent whose only job is game balance.
+
+## The PvP backend
+
+The asynchronous PvP runs on a real service with its own infrastructure:
+
+```mermaid
+flowchart LR
+    C["Game client\nfathomfall.com · Cloudflare Pages"] -->|HTTPS| T["api.the-fish-tank.com\nCloudflare Tunnel — zero open ports"]
+    T -->|"/pvp → localhost:8002"| S["FastAPI PvP service\nsystemd on a Hetzner VPS"]
+    S --> DB[("PostgreSQL\n(Supabase)")]
+    C -.->|"empty match pool"| G["Procedural ghost generator\nclient-side fallback"]
+```
+
+- **Snapshots, not live sessions.** After a PvP battle, the client uploads a snapshot of the
+  player's real party — fish, levels, equipment grid, companion, display name. Uploads are
+  schema-validated server-side (Pydantic: species and character whitelists, ID and name rules),
+  so the pool can't be poisoned with malformed parties.
+- **Matchmaking that degrades gracefully.** Opponents are matched by floor and power level: a
+  ±15% power bracket first, widening to ±30%, then any same-floor snapshot — and if the pool is
+  truly empty, the client generates a procedural ghost party locally so a battle always happens.
+  New players never hit a dead end; real player snapshots take over as the pool fills.
+- **A deepest-floor leaderboard** with player-chosen delver names, validated like everything else.
+- **Run like production, sized like a hobby.** Structured JSON logging, a health endpoint,
+  database migrations, systemd with auto-restart — and push-to-deploy: a merge that touches the
+  backend triggers GitHub Actions to SSH into the VPS, install, migrate, and restart the service.
+  The tunnel means the VPS exposes no inbound ports at all.
 
 ## Version history
 
