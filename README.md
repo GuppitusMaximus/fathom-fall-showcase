@@ -11,9 +11,14 @@ increasingly perilous depths.
 > feature requirements, and plan approval. The game is the platform's largest proof of work.
 
 <p align="center">
-  <img src="docs/media/title.png" width="260" alt="Title screen">
-  <img src="docs/media/battle.png" width="260" alt="Descending through the Sewers">
-  <img src="docs/media/shop.png" width="260" alt="A zone merchant">
+  <img src="docs/media/floor-goblin-caves.png" width="260" alt="Descending through the Goblin Caves">
+  <img src="docs/media/boss-sewer-king.png" width="260" alt="Boss battle against The Sewer King">
+  <img src="docs/media/shop-bone-crypts.png" width="260" alt="The Bone Crypts merchant">
+</p>
+<p align="center">
+  <img src="docs/media/camp-goblin-caves.png" width="260" alt="Breaking camp in the Goblin Caves">
+  <img src="docs/media/pvp-battle.png" width="260" alt="Asynchronous PvP against a rival player's ghost party">
+  <img src="docs/media/starter-select.png" width="260" alt="Choosing starter tidekin in the Delver's Ledger">
 </p>
 
 ## The game
@@ -53,5 +58,5 @@ simulation data rather than gut feel — by an agent whose only job is game bala
 ## Version history
 
 The game ships in small, continuous increments — a patch-notes agent auto-generates the changelog
-on every version bump, and the version counter passed **v0.69** through hundreds of such releases,
+on every version bump, and the version counter passed **v0.73** through hundreds of such releases,
 each shipped through the same plan → implement → QA → review pipeline.
