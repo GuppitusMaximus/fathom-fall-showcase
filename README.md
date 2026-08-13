@@ -10,19 +10,34 @@ increasingly perilous depths.
 > [FishTank platform](https://github.com/GuppitusMaximus/fish-tank) — my role was game design,
 > feature requirements, and plan approval. The game is the platform's largest proof of work.
 
-<p align="center">
-  <img src="docs/media/floor-goblin-caves.png" width="260" alt="Descending through the Goblin Caves">
-  <img src="docs/media/boss-sewer-king.png" width="260" alt="Boss battle against The Sewer King">
-  <img src="docs/media/shop-bone-crypts.png" width="260" alt="The Bone Crypts merchant">
-</p>
-<p align="center">
-  <img src="docs/media/camp-goblin-caves.png" width="260" alt="Breaking camp in the Goblin Caves">
-  <img src="docs/media/pvp-battle.png" width="260" alt="Asynchronous PvP against a rival player's ghost party">
-  <img src="docs/media/starter-select.png" width="260" alt="Choosing starter tidekin in the Delver's Ledger">
-</p>
-<p align="center">
-  <img src="docs/media/party-stats.png" width="260" alt="Expanded party stats panel — per-fish damage and effective HP, party-wide aggregates, and harmony bonuses">
-</p>
+<table align="center">
+  <tr>
+    <td align="center"><img src="docs/media/floor-goblin-caves.png" width="260" alt="Descending through the Goblin Caves"></td>
+    <td align="center"><img src="docs/media/boss-sewer-king.png" width="260" alt="Boss battle against The Sewer King"></td>
+    <td align="center"><img src="docs/media/shop-bone-crypts.png" width="260" alt="The Bone Crypts merchant"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>The Goblin Caves</b> — lantern-lit descent, goblins watching</sub></td>
+    <td align="center"><sub><b>Zone boss</b> — The Sewer King, 108m deep</sub></td>
+    <td align="center"><sub><b>Themed merchants</b> — the Bone Crypts shopkeeper</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/media/camp-goblin-caves.png" width="260" alt="Breaking camp in the Goblin Caves"></td>
+    <td align="center"><img src="docs/media/pvp-battle.png" width="260" alt="Asynchronous PvP against a rival player's ghost party"></td>
+    <td align="center"><img src="docs/media/starter-select.png" width="260" alt="Choosing starter tidekin in the Delver's Ledger"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>Camp</b> — rest, battle formation, and fishing for recruits</sub></td>
+    <td align="center"><sub><b>Async PvP</b> — a rival player's ghost party blocks the path</sub></td>
+    <td align="center"><sub><b>The Delver's Ledger</b> — picking a starting party</sub></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="3"><img src="docs/media/party-stats.png" width="260" alt="Expanded party stats panel — per-fish damage and effective HP, party-wide aggregates, and harmony bonuses"></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="3"><sub><b>The stat layer</b> — per-fish substats, party-wide aggregates, and equipment harmony bonuses</sub></td>
+  </tr>
+</table>
 
 ## The game
 
