@@ -20,6 +20,9 @@ increasingly perilous depths.
   <img src="docs/media/pvp-battle.png" width="260" alt="Asynchronous PvP against a rival player's ghost party">
   <img src="docs/media/starter-select.png" width="260" alt="Choosing starter tidekin in the Delver's Ledger">
 </p>
+<p align="center">
+  <img src="docs/media/party-stats.png" width="260" alt="Expanded party stats panel — per-fish damage and effective HP, party-wide aggregates, and harmony bonuses">
+</p>
 
 ## The game
 
@@ -38,6 +41,9 @@ moves, and stackable status effects (poison, burn, curse, heal-over-time).
   earns harmony bonuses
 - **Asynchronous PvP** — battle ghost snapshots of other players' parties, with server-side
   matchmaking and a leaderboard
+- **Stat depth under a simple surface** — per-fish damage and effective-HP with expandable
+  substats, party-wide aggregates (healing per second, a single power score), status affinities,
+  and equipment harmony bonuses all feed the combat math
 - **Anti-stall design** — "Fathom Pressure" stacks a curse on drawn-out fights, so battles resolve
 
 ## How it's built
