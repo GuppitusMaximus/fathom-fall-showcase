@@ -134,40 +134,6 @@ changed substantially:
 - zone art, ambient audio, action destinations, the title scene, battle presentation, and
   on-demand zone loading were extensively rebuilt.
 
-## Earlier-build gallery
-
-These captures are retained as a visual record of v0.72–0.73. They should not be read as current
-UI screenshots.
-
-<table align="center">
-  <tr>
-    <td align="center"><img src="docs/media/floor-goblin-caves.png" width="260" alt="Earlier-build floor scene in the Goblin Caves"></td>
-    <td align="center"><img src="docs/media/boss-sewer-king.png" width="260" alt="Earlier-build boss battle against the Sewer King"></td>
-    <td align="center"><img src="docs/media/shop-bone-crypts.png" width="260" alt="Earlier-build Bone Crypts shop"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Earlier floor presentation</sub></td>
-    <td align="center"><sub>Earlier boss-battle presentation</sub></td>
-    <td align="center"><sub>Earlier themed merchant</sub></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="docs/media/camp-goblin-caves.png" width="260" alt="Earlier-build camp scene in the Goblin Caves"></td>
-    <td align="center"><img src="docs/media/pvp-battle.png" width="260" alt="Earlier-build asynchronous PvP battle"></td>
-    <td align="center"><img src="docs/media/starter-select.png" width="260" alt="Earlier-build starter tidekin selection in the Delver's Ledger"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>Camp before cooking and the new Tide Pool</sub></td>
-    <td align="center"><sub>Ghost battle before PvP v2</sub></td>
-    <td align="center"><sub>Earlier Ledger starter page</sub></td>
-  </tr>
-  <tr>
-    <td align="center" colspan="3"><img src="docs/media/party-stats.png" width="260" alt="Earlier-build expanded party stats panel"></td>
-  </tr>
-  <tr>
-    <td align="center" colspan="3"><sub>Earlier party-stat panel</sub></td>
-  </tr>
-</table>
-
 ## How it is built
 
 | Area | Current implementation |
