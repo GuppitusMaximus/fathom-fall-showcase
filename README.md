@@ -21,17 +21,28 @@ tiers — 20 floors — before ending at a **Coming Soon** screen. The current p
 
 ## Current demo gallery
 
-Captured from the public v0.93.12 demo on September 27, 2026.
+Current UI and gameplay previews, captured from the public v0.93.12 build on September 27, 2026.
+Also see the [current title screen](docs/media/title-0.93.12.png).
 
 <table align="center">
   <tr>
-    <td align="center"><img src="docs/media/title-0.93.12.png" width="260" alt="Current Fathom Fall title screen overlooking the dungeon shaft"></td>
+    <td align="center"><img src="docs/media/floor-0.93.12.png" width="260" alt="Current exploration scene in the Fry Pits, with the resource bar and medallion"></td>
+    <td align="center"><img src="docs/media/battle-0.93.12.png" width="260" alt="Current battle against the Sewer King, showing party health, attack meters, and Blight buildup"></td>
+    <td align="center"><img src="docs/media/camp-0.93.12.png" width="260" alt="Current Sewer camp with cooking, tacklebox, Tide Pool, formation, and Delver's Catch controls"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>The Fry Pits</b> — choose the next descent</sub></td>
+    <td align="center"><sub><b>The Sewer King</b> — the party in battle</sub></td>
+    <td align="center"><sub><b>Camp</b> — cook, fish, and prepare</sub></td>
+  </tr>
+  <tr>
     <td align="center"><img src="docs/media/ledger-0.93.12.png" width="260" alt="Current Delver's Ledger showing the Abyssal Angler and his playstyle"></td>
+    <td align="center"><img src="docs/media/tacklebox-0.93.12.png" width="260" alt="Current six-by-six tacklebox preview with shaped equipment and formation-line hooks"></td>
     <td align="center"><img src="docs/media/ghost-record-0.93.12.png" width="260" alt="Expanded leaderboard ghost showing its recorded party, tacklebox, knots, Souls and Eye state"></td>
   </tr>
   <tr>
-    <td align="center"><sub><b>The descent begins</b> — the current title scene</sub></td>
     <td align="center"><sub><b>The Delver's Ledger</b> — choose your delver</sub></td>
+    <td align="center"><sub><b>Tackle Weave</b> — build around shape and position</sub></td>
     <td align="center"><sub><b>A recorded rival</b> — inspect the build behind a ghost</sub></td>
   </tr>
 </table>
