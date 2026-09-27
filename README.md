@@ -1,109 +1,186 @@
 # Fathom Fall
 
-A roguelike dungeon-diving RPG where you lead a party of aquatic creatures through 100 floors of
-increasingly perilous depths.
+**Build a tidekin party, rig a tacklebox, and carry one run through a branching descent.**
 
-### ▶️ [Play it now at fathomfall.com](https://fathomfall.com) — free, in your browser, no install.
+Fathom Fall is a portrait-first browser roguelike built with Phaser. A complete run spans 50 floors
+across five 10-floor zones: choose a path among eight normal zone themes, then descend into the
+Dungeon Heart. Battles play automatically, but party order, meals, equipment placement, permanent
+knots, and the route through the dungeon all shape the result.
 
-> **The source is private.** This repo documents the game and how it was built. What makes it
-> unusual: **every line of game code was written by AI agents** on the
-> [FishTank platform](https://github.com/GuppitusMaximus/fish-tank) — my role was game design,
-> feature requirements, and plan approval. The game is the platform's largest proof of work.
+### ▶️ [Play the public demo at fathomfall.com](https://fathomfall.com)
 
-<table align="center">
-  <tr>
-    <td align="center"><img src="docs/media/floor-goblin-caves.png" width="260" alt="Descending through the Goblin Caves"></td>
-    <td align="center"><img src="docs/media/boss-sewer-king.png" width="260" alt="Boss battle against The Sewer King"></td>
-    <td align="center"><img src="docs/media/shop-bone-crypts.png" width="260" alt="The Bone Crypts merchant"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub><b>The Goblin Caves</b> — lantern-lit descent, goblins watching</sub></td>
-    <td align="center"><sub><b>Zone boss</b> — The Sewer King, 108m deep</sub></td>
-    <td align="center"><sub><b>Themed merchants</b> — the Bone Crypts shopkeeper</sub></td>
-  </tr>
-  <tr>
-    <td align="center"><img src="docs/media/camp-goblin-caves.png" width="260" alt="Breaking camp in the Goblin Caves"></td>
-    <td align="center"><img src="docs/media/pvp-battle.png" width="260" alt="Asynchronous PvP against a rival player's ghost party"></td>
-    <td align="center"><img src="docs/media/starter-select.png" width="260" alt="Choosing starter tidekin in the Delver's Ledger"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub><b>Camp</b> — rest, battle formation, and fishing for recruits</sub></td>
-    <td align="center"><sub><b>Async PvP</b> — a rival player's ghost party blocks the path</sub></td>
-    <td align="center"><sub><b>The Delver's Ledger</b> — picking a starting party</sub></td>
-  </tr>
-  <tr>
-    <td align="center" colspan="3"><img src="docs/media/party-stats.png" width="260" alt="Expanded party stats panel — per-fish damage and effective HP, party-wide aggregates, and harmony bonuses"></td>
-  </tr>
-  <tr>
-    <td align="center" colspan="3"><sub><b>The stat layer</b> — per-fish substats, party-wide aggregates, and equipment harmony bonuses</sub></td>
-  </tr>
-</table>
+The demo is free, runs in the browser, and needs no install. It currently includes the first two
+tiers — 20 floors — before ending at a **Coming Soon** screen. The current public build is
+**v0.93.12** (September 27, 2026).
 
-## The game
+> The game source is private. This public repository is a player-facing showcase of the game and
+> its development. Fathom Fall is built through the
+> [FishTank](https://github.com/GuppitusMaximus/fish-tank) agent workflow: human direction and
+> approval, with implementation, QA, balance work, and release support carried out by coding
+> agents.
 
-Recruit fish, equip gear, and battle down through themed dungeon zones. Combat is auto-battler
-style — a party of up to 3 fish fights waves of monsters with speed-based turn order, special
-moves, and stackable status effects (poison, burn, curse, heal-over-time).
-
-**Core loop:** delve floors → battle monsters → visit shops → rest at camp → go deeper.
-
-- **7 zones across 100 floors** — Sewers, Goblin Caves, Bone Crypts, Deep Dungeon, Shadow Realm,
-  Ancient Chambers, and the Dungeon Heart — each with unique background art, ambient particle
-  effects, a themed merchant, and its own UI palette
-- **10 fish species** with distinct roles, growth curves, and special moves — from the
-  Glimmergupp skirmisher to the tanky Spinebloat to the rare Golden Koi
-- **Tetris-style equipment** — gear pieces are shapes placed on a 5×5 grid; symmetric placement
-  earns harmony bonuses
-- **Asynchronous PvP** — battle ghost snapshots of other players' parties, with server-side
-  matchmaking and a leaderboard
-- **Stat depth under a simple surface** — per-fish damage and effective-HP with expandable
-  substats, party-wide aggregates (healing per second, a single power score), status affinities,
-  and equipment harmony bonuses all feed the combat math
-- **Anti-stall design** — "Fathom Pressure" stacks a curse on drawn-out fights, so battles resolve
-
-## How it's built
-
-| | |
-|---|---|
-| Engine | Phaser 3 + Vite, vanilla JavaScript |
-| Scale | 12 scenes, 20+ system modules, 100 floors of data-driven content |
-| Backend | FastAPI PvP service + PostgreSQL on a VPS behind a Cloudflare Tunnel — see [The PvP backend](#the-pvp-backend) |
-| QA | Playwright browser tests + a headless battle simulator for combat balance tuning |
-| Art | AI-generated pixel art — sprite sheets, zone backgrounds, and portraits produced by a scripted generation pipeline with atlas packing |
-| Delivery | Continuous — every change planned, implemented, QA'd, and reviewed by autonomous agents; `main` auto-deploys to fathomfall.com |
-
-The balance work is its own story: a **headless simulator** runs thousands of battles per tuning
-pass, so combat math (fish stats, equipment scaling, encounter difficulty) is adjusted against
-simulation data rather than gut feel — by an agent whose only job is game balance.
-
-## The PvP backend
-
-The asynchronous PvP runs on a real service with its own infrastructure:
+## What a run looks like
 
 ```mermaid
 flowchart LR
-    C["Game client\nfathomfall.com · Cloudflare Pages"] -->|HTTPS| T["api.the-fish-tank.com\nCloudflare Tunnel — zero open ports"]
-    T -->|"/pvp → localhost:8002"| S["FastAPI PvP service\nsystemd on a Hetzner VPS"]
-    S --> DB[("PostgreSQL\n(Supabase)")]
-    C -.->|"empty match pool"| G["Procedural ghost generator\nclient-side fallback"]
+    L["Delver's Ledger<br/>identity + starting tidekin"] --> Z["Choose a zone route"]
+    Z --> F["Delve through a 10-floor tier"]
+    F --> B["Packs and bosses"]
+    B --> R["Reel Spoils<br/>gold + ingredients + trophies"]
+    R --> C["Camp<br/>rest · cook · rig · fish · formation"]
+    C --> F
+    F --> P["Asynchronous ghost battle"]
+    P --> M["Medallion<br/>bank a Soul or open the Eye"]
+    M --> Z
 ```
 
-- **Snapshots, not live sessions.** After a PvP battle, the client uploads a snapshot of the
-  player's real party — fish, levels, equipment grid, companion, display name. Uploads are
-  schema-validated server-side (Pydantic: species and character whitelists, ID and name rules),
-  so the pool can't be poisoned with malformed parties.
-- **Matchmaking that degrades gracefully.** Opponents are matched by floor and power level: a
-  ±15% power bracket first, widening to ±30%, then any same-floor snapshot — and if the pool is
-  truly empty, the client generates a procedural ghost party locally so a battle always happens.
-  New players never hit a dead end; real player snapshots take over as the pool fills.
-- **A deepest-floor leaderboard** with player-chosen delver names, validated like everything else.
-- **Run like production, sized like a hobby.** Structured JSON logging, a health endpoint,
-  database migrations, systemd with auto-restart — and push-to-deploy: a merge that touches the
-  backend triggers GitHub Actions to SSH into the VPS, install, migrate, and restart the service.
-  The tunnel means the VPS exposes no inbound ports at all.
+The full run draws from nine themed zones: **The Sewers, The Fry Pits, Bone Crypts, The
+Underdeep, The Pale Delta, The Gilded Vaults, Molten Forge, Frozen Abyss,** and the final
+**Dungeon Heart**. Each route has its own battle, camp, shop, floor, and fall art; monster and boss
+rosters; merchant; ambient sound; lighting; and environmental effects.
 
-## Version history
+### Build a party
 
-The game ships in small, continuous increments — a patch-notes agent auto-generates the changelog
-on every version bump, and the version counter passed **v0.73** through hundreds of such releases,
-each shipped through the same plan → implement → QA → review pipeline.
+The book-like **Delver's Ledger** introduces the delver, cosmetic portrait identity, starter
+tidekin, and the name carried into PvP. The current playable delver is the Abyssal Angler, who
+enters with two chosen tidekin and companion Bernie. At camp, the illustrated Tide Pool lets the
+player swap the active three-member formation with recruited tidekin.
+
+Combat runs continuously, with speed-based turns and independent animation lanes for each unit.
+Formation, active abilities, critical hits, shields, healing, and the six elemental stats — Pyre,
+Frost, Blight, Tide, Hex, and Shell — decide how a party handles each encounter. Fathom Pressure
+keeps long fights from stalling.
+
+### Rig the tacklebox
+
+Equipment is a physical build rather than a list of stat slots. Every trophy is a shaped piece on
+a **6×6 tacklebox**. Rotate and place its hook over the front, middle, or back formation line to
+choose who receives its effects. Piece stats scale with both zone and the depth at which that copy
+was found, so two copies of the same trophy can have different value.
+
+Connected pieces can be **tied off** into permanent knots. The pieces leave the active board, a
+reduced part of their power becomes a lasting imprint on that formation line, and their source
+remains in the run's knot history. This turns limited board space into the central build decision:
+keep a strong shape active now, or convert a connected set into room and permanent power.
+
+Harmony, the Angler's companion, also lives on the board. She grants Bernie 50% of his base Attack
+and echoes half the stats of equipment rigged over her, making her position part of the puzzle.
+
+### Recover and prepare at camp
+
+Camp is the planning half of a run:
+
+- **Cook** ingredients into Stew, Broth, Kebab, or Soup, choosing duration and elemental flavour
+  for the stretch ahead.
+- **Fish in Delver's Catch**, a one-thumb casting and reeling game with timing, line tension, and
+  Caught/Great/Perfect grades.
+- Use a **Wild Cast** for a seeded mix of equipment, ingredients, gold, or recruits, or sacrifice
+  an unequipped trophy in a **Countercurrent Offering** to bias the catch toward a complementary
+  stat or element.
+- Open the **Tide Pool** to inspect recruits and change formation, or return to the tacklebox to
+  rig new trophies and tie off connected pieces.
+
+Fishing attempts are committed when cast and survive a reload, so a result cannot be rerolled by
+refreshing the page. Defeats deepen the Undertow and push later catches toward recovery rewards.
+
+### Fight versioned player ghosts
+
+Every zone ends with asynchronous PvP. The opponent is a frozen record of another run rather than
+a live player session. The current v2 ghost format captures the party order, resolved combat
+specs, tacklebox and knot history, meal, zone path, medallion state, delver identity, and the exact
+ruleset/build provenance needed to replay that opponent faithfully.
+
+Those records are immutable and versioned. The game accepts a ghost only when its schema and
+ruleset are compatible with the running release; it does not silently rebuild an old opponent
+under new balance rules. The leaderboard is therefore a list of actual ghost records. Open a row
+to inspect the run behind it, then tap a party member or equipment piece for its card.
+
+A PvP win banks a **Delver's Soul**. A loss opens the **Dungeon Heart's eye** another step and
+costs part of the run's gold. The medallion in the bottom bar keeps both histories visible.
+
+## What changed since the earlier showcase
+
+The screenshots in this repository were captured around v0.72–0.73. The art direction still
+represents the game, but the interface and several systems have changed substantially since then:
+
+- the old linear 100-floor structure became a branching five-tier, **50-floor run**;
+- the world expanded and was renamed into **nine zone themes**, with a route choice at each
+  non-final tier;
+- the old 5×5 equipment grid became the **6×6 Tackle Weave**, with formation-line hooks,
+  connected-item tie-offs, permanent knots, and per-copy depth scaling;
+- combat moved to the v2 ruleset with six elements, resistances, status buildup, crits, and
+  independent animation lanes;
+- camp gained cooking, the Tide Pool roster, and **Delver's Catch**, including Countercurrent
+  Offerings;
+- PvP outcomes now feed the Souls-and-Eye medallion, while PvP v2 preserves immutable,
+  release-versioned opponents and inspectable leaderboard records;
+- zone art, ambient audio, action destinations, the title scene, battle presentation, and
+  on-demand zone loading were extensively rebuilt.
+
+## Earlier-build gallery
+
+These captures are retained as a visual record of v0.72–0.73. They should not be read as current
+UI screenshots.
+
+<table align="center">
+  <tr>
+    <td align="center"><img src="docs/media/floor-goblin-caves.png" width="260" alt="Earlier-build floor scene in the Goblin Caves"></td>
+    <td align="center"><img src="docs/media/boss-sewer-king.png" width="260" alt="Earlier-build boss battle against the Sewer King"></td>
+    <td align="center"><img src="docs/media/shop-bone-crypts.png" width="260" alt="Earlier-build Bone Crypts shop"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Earlier floor presentation</sub></td>
+    <td align="center"><sub>Earlier boss-battle presentation</sub></td>
+    <td align="center"><sub>Earlier themed merchant</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/media/camp-goblin-caves.png" width="260" alt="Earlier-build camp scene in the Goblin Caves"></td>
+    <td align="center"><img src="docs/media/pvp-battle.png" width="260" alt="Earlier-build asynchronous PvP battle"></td>
+    <td align="center"><img src="docs/media/starter-select.png" width="260" alt="Earlier-build starter tidekin selection in the Delver's Ledger"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>Camp before cooking and the new Tide Pool</sub></td>
+    <td align="center"><sub>Ghost battle before PvP v2</sub></td>
+    <td align="center"><sub>Earlier Ledger starter page</sub></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="3"><img src="docs/media/party-stats.png" width="260" alt="Earlier-build expanded party stats panel"></td>
+  </tr>
+  <tr>
+    <td align="center" colspan="3"><sub>Earlier party-stat panel</sub></td>
+  </tr>
+</table>
+
+## How it is built
+
+| Area | Current implementation |
+|---|---|
+| Game | Phaser 3.90, Vite 6, vanilla JavaScript modules |
+| Layout | Responsive portrait and landscape canvas; touch-first controls |
+| Content | Nine data-driven zone themes with zone-specific equipment, encounters, and art |
+| Saves | Browser local storage with explicit format migrations, validation, and battle-resume locks |
+| PvP | Versioned ghost records, ruleset compatibility checks, asynchronous matchmaking, and inspectable leaderboards |
+| Balance | Deterministic headless simulation across zone orders, parties, equipment policies, meals, and seeds |
+| QA | Node-based system tests plus Playwright browser coverage for scenes, saves, responsive layout, and end-to-end flows |
+| Art and audio | Pixel-art asset pipelines, atlases and manifests, per-zone lazy loading, layered effects, music, ambience, and UI sound |
+
+Balance changes are measured before release. The simulator can replay the same route, seed, party,
+equipment policy, and cooking policy across thousands of battles, so changes to encounter targets,
+item scaling, critical hits, or elemental rules can be compared against a stable baseline.
+
+The browser build also loads zone-specific art on demand. That keeps the growing set of animated
+backgrounds, monsters, merchants, effects, and audio practical on mobile browsers.
+
+## Availability and project status
+
+| Capability | Status |
+|---|---|
+| Browser demo | Available now at [fathomfall.com](https://fathomfall.com); first two tiers / 20 floors |
+| Current game structure | Five tiers / 50 floors, choosing four routes before the Dungeon Heart |
+| Native iOS and Android apps | Planned; no native build is currently published |
+| Account login and cross-device progression | Planned; the current demo uses local browser saves |
+| Payments | Planned for a later release; none are enabled in the current demo |
+| NFTs or blockchain | Not part of the game |
+
+Fathom Fall is under active development. This page describes the v0.93.12 release and will change
+as development continues.
