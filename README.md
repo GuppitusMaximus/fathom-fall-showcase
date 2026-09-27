@@ -19,6 +19,23 @@ tiers — 20 floors — before ending at a **Coming Soon** screen. The current p
 > approval, with implementation, QA, balance work, and release support carried out by coding
 > agents.
 
+## Current demo gallery
+
+Captured from the public v0.93.12 demo on September 27, 2026.
+
+<table align="center">
+  <tr>
+    <td align="center"><img src="docs/media/title-0.93.12.png" width="260" alt="Current Fathom Fall title screen overlooking the dungeon shaft"></td>
+    <td align="center"><img src="docs/media/ledger-0.93.12.png" width="260" alt="Current Delver's Ledger showing the Abyssal Angler and his playstyle"></td>
+    <td align="center"><img src="docs/media/ghost-record-0.93.12.png" width="260" alt="Expanded leaderboard ghost showing its recorded party, tacklebox, knots, Souls and Eye state"></td>
+  </tr>
+  <tr>
+    <td align="center"><sub><b>The descent begins</b> — the current title scene</sub></td>
+    <td align="center"><sub><b>The Delver's Ledger</b> — choose your delver</sub></td>
+    <td align="center"><sub><b>A recorded rival</b> — inspect the build behind a ghost</sub></td>
+  </tr>
+</table>
+
 ## What a run looks like
 
 ```mermaid
@@ -53,8 +70,8 @@ keeps long fights from stalling.
 
 ### Rig the tacklebox
 
-Equipment is a physical build rather than a list of stat slots. Every trophy is a shaped piece on
-a **6×6 tacklebox**. Rotate and place its hook over the front, middle, or back formation line to
+Every equipment trophy is a shaped piece on a **6×6 tacklebox**. Rotate and place its hook over
+the front, middle, or back formation line to
 choose who receives its effects. Piece stats scale with both zone and the depth at which that copy
 was found, so two copies of the same trophy can have different value.
 
@@ -100,8 +117,8 @@ costs part of the run's gold. The medallion in the bottom bar keeps both histori
 
 ## What changed since the earlier showcase
 
-The screenshots in this repository were captured around v0.72–0.73. The art direction still
-represents the game, but the interface and several systems have changed substantially since then:
+The original showcase described v0.72–0.73. Since then, the interface and several systems have
+changed substantially:
 
 - the old linear 100-floor structure became a branching five-tier, **50-floor run**;
 - the world expanded and was renamed into **nine zone themes**, with a route choice at each
@@ -180,7 +197,6 @@ backgrounds, monsters, merchants, effects, and audio practical on mobile browser
 | Native iOS and Android apps | Planned; no native build is currently published |
 | Account login and cross-device progression | Planned; the current demo uses local browser saves |
 | Payments | Planned for a later release; none are enabled in the current demo |
-| NFTs or blockchain | Not part of the game |
 
 Fathom Fall is under active development. This page describes the v0.93.12 release and will change
 as development continues.
